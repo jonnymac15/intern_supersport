@@ -1,0 +1,14 @@
+{
+  "name": "drupal/casestudies",
+  "type": "drupal-module",
+  "description": "the module of power",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/casestudies",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/casestudies",
+    "source": "http://cgit.drupalcode.org/casestudies"
+  },
+  "require": { }
+}

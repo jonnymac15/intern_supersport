@@ -1,0 +1,5 @@
+name: casestudies
+type: module
+description: the module of power
+core: 8.x
+package: Custom

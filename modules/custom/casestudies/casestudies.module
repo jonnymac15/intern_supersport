@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains casestudies.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function casestudies_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the casestudies module.
+    case 'help.page.casestudies':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('the module of power') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function casestudies_theme() {
+  return [
+    'casestudies' => [
+      'render element' => 'children',
+    ],
+  ];
+}

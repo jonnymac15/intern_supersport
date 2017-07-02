@@ -752,3 +752,30 @@ $settings['file_scan_ignore_directories'] = [
 # if (file_exists(__DIR__ . '/settings.local.php')) {
 #   include __DIR__ . '/settings.local.php';
 # }
+
+
+
+// CONFIGURATION
+$sub_dir = "/41/"; // enter a subdirectory, if any. otherwise, use ""
+$active = 0; // set to 1 if using clean URLS with IIS
+
+// CODE
+if ($active && strstr($_SERVER["QUERY_STRING"], ";")) {
+  $qs = explode(";", $_SERVER["QUERY_STRING"]);
+  $url = array_pop($qs);
+  $parts = parse_url($url);
+  unset($_GET, $_SERVER['QUERY_STRING']); // remove cruft added by IIS
+  if ($sub_dir) {
+    $parts["path"] = substr($parts["path"], strlen($sub_dir));
+  }
+  $_GET["q"] = trim($parts["path"], "/");
+  $_SERVER["REQUEST_URI"] = $parts["path"];
+  if( array_key_exists( "query", $parts ) && $parts["query"] ) {
+    $_SERVER["REQUEST_URI"] .= '?'. $parts["query"];
+    $_SERVER["QUERY_STRING"] = $parts["query"];
+    $_SERVER["ARGV"] = array($parts["query"]);
+    parse_str($parts['query'], $arr);
+    $_GET = array_merge($_GET, $arr);
+    $_REQUEST = array_merge($_REQUEST, $arr);
+  }
+}

@@ -1,0 +1,94 @@
+<?php
+
+/**
+ * @file
+ * Preprocess functions for McTheme.
+ */
+
+use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Database\Database;
+
+/**
+ * Prepares variables for the html.html.twig template.
+ */
+function mctheme_preprocess_html(&$variables) {
+  try {
+    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+  }
+  catch (Exception $e) {
+    // If the database is not yet available, set default values for these
+    // variables.
+    $variables['is_front'] = FALSE;
+  }
+
+  // If we're on the front page.
+  if (!$variables['is_front']) {
+    // Add unique classes for each page and website section.
+    $path = \Drupal::service('path.current')->getPath();
+    $alias = \Drupal::service('path.alias_manager')->getAliasByPath($path);
+    $alias = trim($alias, '/');
+    if (!empty($alias)) {
+      $name = str_replace('/', '-', $alias);
+      $variables['attributes']['class'][] = 'page-' . $name;
+      list($section,) = explode('/', $alias, 2);
+      if (!empty($section)) {
+        $variables['attributes']['class'][] = 'section-' . $section;
+      }
+    }
+  }
+
+  // Add cachability metadata.
+  $theme_name = \Drupal::theme()->getActiveTheme()->getName();
+  $theme_settings = \Drupal::config($theme_name . '.settings');
+  CacheableMetadata::createFromRenderArray($variables)
+    ->addCacheableDependency($theme_settings)
+    ->applyTo($variables);
+  // Union all theme setting variables to the html.html.twig template.
+  $variables += $theme_settings->getOriginal();
+
+  // kint($variables['page']['sidebar_first']['views_block__nfl_sidebar_block_1']);
+}
+
+/**
+ * Prepares variables for the field.html.twig template.
+ */
+function mctheme_preprocess_field(&$variables, $hook) {
+  // Make additional variables available to the template.
+  $variables['bundle'] = $variables['element']['#bundle'];
+}
+
+
+function mctheme_preprocess_taxonomy_term(&$variables) {
+  // Obtain the tid of the term being processed currently
+  $term = $variables['elements']['#taxonomy_term'];
+  $tid = $term->get('tid')->value;
+
+  // Establish connection to the Database
+  $connection = Database::getConnection();
+
+  // Query the most recent article based upon tid of term
+  $query = $connection
+           ->select('node_field_data', 'nfd')
+           ->fields('nfd', array('type','title','created', 'nid'));
+  $query->leftJoin('node__field_team_name', 'nftn', 'nfd.nid = nftn.entity_id');
+  $query->leftJoin('taxonomy_term_field_data', 'ttfd', 'ttfd.tid = nftn.field_team_name_target_id');
+  $query->where('(nftn.field_team_name_target_id = :tid)', array(':tid' => $tid))
+        ->orderBy('created', 'desc')
+        ->range(0,1);
+
+  // fetch the query object and process the title and url
+  $recent_blog_object = $query
+        -> execute()
+        -> fetchObject();
+  $recent_blog_title = $recent_blog_object->title;
+  $recent_blog_node = $recent_blog_object->nid;
+  $options = ['absolute' => TRUE];
+  $url = \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => (int)$recent_blog_node], $options);
+  $url = $url->toString();
+
+  // Inject the title and url into variables for rendering
+  $variables['recent_blog'] = $recent_blog_title;
+  $variables['recent_blog_url'] = $url;
+
+  // $results = $data->fetchAll(\PDO::FETCH_OBJ);
+}
