@@ -1,14 +1,13 @@
-# example.content:
-#   path: '/example'
-#   defaults:
-#     _controller: '\Drupal\example\Controller\ExampleController::content'
-#     _title: 'Hello World'
-#   requirements:
-#     _permission: 'access content'
-
-casestudies.render:
-  # Define the path name
+# The routing system allows form classes to be provided
+# as route handlers as opposed to using controllers.
+# In this case, the route system takes care of instantiating
+# the form class and invoking the proper methods.
+# This route will integrate the CaseStudiesForm into the Drupal
+# site's URI structure.
+casestudies.form:
   path: '/casestudies/form'
-  # define the default properties of a route
   defaults:
+    _title: 'Case Studies Form'
+    _form: '\Drupal\casestudies\Form\CaseStudiesForm'
+  requirements:
     _permission: 'access content'
