@@ -1,0 +1,40 @@
+/* line 2, ../../sass/theme/print.sass */
+* {
+  background-color: transparent;
+}
+
+/* line 5, ../../sass/theme/print.sass */
+.sidebar,
+#navigation,
+#header-region,
+#footer,
+.breadcrumb,
+.tabs,
+.feed-icon,
+.links {
+  display: none;
+}
+
+/* line 15, ../../sass/theme/print.sass */
+.layout-container {
+  width: 100%;
+}
+
+/* line 18, ../../sass/theme/print.sass */
+#content,
+.title {
+  margin: 20px 0;
+  width: auto;
+}
+
+/* line 24, ../../sass/theme/print.sass */
+a:hover, a:active, a:link, a:visited {
+  color: black;
+}
+
+/* line 32, ../../sass/theme/print.sass */
+#content a:link:after, #content a:visited:after {
+  content: " (" attr(href) ") ";
+  font-size: 0.8em;
+  font-weight: normal;
+}

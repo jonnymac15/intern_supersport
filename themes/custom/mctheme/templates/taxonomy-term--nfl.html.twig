@@ -27,14 +27,15 @@
 <div{{ attributes }}>
   {% if not page %}
     <!-- Link to all things related to this term -->
-    <div class="recent-article col-12">
+    <div class="team-logo col-12">
       <h2><a href="{{ url }}">{{ name }}</a></h2>
     </div>
   {% endif %}
   {{ title_suffix }}
-  {{ content }}
+  {{ content.field_team_logo }}
   <!-- Link to the most recent article related to this term -->
   <div class="recent-article col-12">
     <a href="{{ recent_blog_url }}">{{ recent_blog }}</a>
+    <br><hr>
   </div>
 </div>
