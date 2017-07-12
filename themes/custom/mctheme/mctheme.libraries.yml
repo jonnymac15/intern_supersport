@@ -9,6 +9,7 @@ global:
       css/components/components.css: {}
     theme:
       css/theme/theme.css: {}
+      stylesheets/style.css: {}
       css/theme/print.css: { media: print }
   js:
     js/modernizr.js: {}

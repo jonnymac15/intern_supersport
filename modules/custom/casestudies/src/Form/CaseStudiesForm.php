@@ -109,6 +109,6 @@
             }
             $opt_index += 1;
           };
-          drupal_set_message('nodes created lul', TRUE);
+          drupal_set_message('Created nodes hyperlul XD', TRUE);
         }
     }

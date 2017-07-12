@@ -1,0 +1,5 @@
+@import "neat";
+
+.layout-container {
+  @include outer-container;
+}

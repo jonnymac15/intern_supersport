@@ -1,0 +1,10 @@
+reset:
+  version: 3.0.3
+  css:
+    theme:
+      node_modules/normalize.css/normalize.css: {}
+style:
+  version: 1.x
+  css:
+    theme:
+      css/style.css: {}

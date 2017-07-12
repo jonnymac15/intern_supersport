@@ -1,0 +1,20 @@
+{
+  "name": "dourbon",
+  "version": "0.0.0",
+  "description": "",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.0.4",
+    "node-bourbon": "^4.2.3",
+    "node-neat": "^1.7.2",
+    "normalize.css": "^3.0.3"
+  },
+  "devDependencies": {
+    "gulp-sass": "^2.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raffi Hovhannesian",
+  "license": "GPL"
+}

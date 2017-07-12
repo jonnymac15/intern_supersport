@@ -1,0 +1,20 @@
+name: Bourbon
+type: theme
+description: 'Flexible base theme using the power of Bourbon, Neat, Bitters and much more.'
+package: Bourbon
+# core: 8.x
+libraries:
+  - bourbon/reset
+  - bourbon/style
+regions:
+  header: Header
+  content: Content
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: Footer
+
+# Information added by Drupal.org packaging script on 2016-01-29
+version: '8.x-1.x-dev'
+core: '8.x'
+project: 'bourbon'
+datestamp: 1454095764

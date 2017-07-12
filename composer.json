@@ -9,7 +9,8 @@
         "drupal/console": "~1.0",
         "ajgl/breakpoint-twig-extension": "^0.3.0",
         "drupal/admin_toolbar": "^1.19",
-        "drupal/search_kint": "^1.0"
+        "drupal/search_kint": "^1.0",
+        "drupal/twig_xdebug": "^1.0"
     },
     "replace": {
         "drupal/core": "~8.2"
@@ -62,6 +63,5 @@
         }
     },
     "require-dev": {
-        "drupal/twig_xdebug": "^1.0"
     }
 }

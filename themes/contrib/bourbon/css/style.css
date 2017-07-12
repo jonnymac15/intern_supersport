@@ -1,0 +1,16 @@
+html {
+  box-sizing: border-box; }
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit; }
+
+.layout-container {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  .layout-container::after {
+    clear: both;
+    content: "";
+    display: table; }
